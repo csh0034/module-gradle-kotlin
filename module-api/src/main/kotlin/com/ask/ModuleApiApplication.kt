@@ -1,11 +1,11 @@
-package com.ask.modulecore
+package com.ask
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ModuleCoreApplication
+class ModuleApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<ModuleCoreApplication>(*args)
+    runApplication<ModuleApiApplication>(*args)
 }

@@ -1,28 +1,30 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    val springBootVersion = "2.6.4"
-    val dependencyManagementVersion = "1.0.11.RELEASE"
-    val kotlinVersion = "1.6.10"
-
-    id("org.springframework.boot") version springBootVersion
-    id("io.spring.dependency-management") version dependencyManagementVersion
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.spring") version kotlinVersion
-    kotlin("plugin.allopen") version kotlinVersion
-    kotlin("kapt") version kotlinVersion
+    kotlin("jvm")
+    kotlin("kapt")
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management")
+    kotlin("plugin.spring")
+    kotlin("plugin.allopen")
+    kotlin("plugin.jpa")
 }
 
 allprojects {
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-kapt")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.jetbrains.kotlin.plugin.allopen")
-
     repositories {
         mavenCentral()
+    }
+}
+
+subprojects {
+    apply {
+        plugin("kotlin")
+        plugin("kotlin-kapt")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("org.jetbrains.kotlin.plugin.allopen")
+        plugin("org.jetbrains.kotlin.plugin.jpa")
     }
 
     group = "com.ask"
@@ -45,9 +47,7 @@ allprojects {
         annotation("javax.persistence.Embeddable")
         annotation("javax.persistence.MappedSuperclass")
     }
-}
 
-subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -55,10 +55,12 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-        implementation("com.querydsl:querydsl-jpa:5.0.0")
-        kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+        implementation("com.querydsl:querydsl-jpa")
+        kapt("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties["querydsl.version"]}:jpa")
         kapt("jakarta.persistence:jakarta.persistence-api")
         kapt("jakarta.annotation:jakarta.annotation-api")
+
+        runtimeOnly("com.h2database:h2")
 
         kapt("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
