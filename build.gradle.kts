@@ -66,3 +66,15 @@ subprojects {
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 }
+
+tasks {
+    jar {
+        enabled = false
+    }
+    test {
+        dependsOn(":module-core:test")
+    }
+    build {
+        dependsOn(":module-core:build")
+    }
+}
