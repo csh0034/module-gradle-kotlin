@@ -22,9 +22,9 @@ subprojects {
         plugin("kotlin-kapt")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
-        plugin("org.jetbrains.kotlin.plugin.spring")
-        plugin("org.jetbrains.kotlin.plugin.allopen")
-        plugin("org.jetbrains.kotlin.plugin.jpa")
+        plugin("kotlin-spring")
+        plugin("kotlin-allopen")
+        plugin("kotlin-jpa")
     }
 
     group = "com.ask"
