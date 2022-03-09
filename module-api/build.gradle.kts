@@ -3,6 +3,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
-tasks.getByName<Jar>("jar") {
+tasks.jar {
     enabled = false
 }
