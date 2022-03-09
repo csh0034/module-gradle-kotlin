@@ -50,6 +50,27 @@ tasks.getByName<Jar>("jar") {
 }
 ```
 
+### settings.gradle.kts 에서 gradle.properties 참조
+
+- [Gradle, Settings](https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html)
+- [stack overflow, Get gradle property from settings](https://stackoverflow.com/questions/64644810/get-gradle-property-from-settings)
+
+#### gradle.properties
+
+```properties
+kotlinVersion=1.6.10
+springBootVersion=2.6.4
+dependencyManagementVersion=1.0.11.RELEASE
+```
+
+#### settings.gradle.kts
+
+```kotlin
+val kotlinVersion: String by settings
+val springBootVersion: String by settings
+val dependencyManagementVersion: String by settings
+```
+
 ## 참조
 - [kotlin, gradle](https://kotlinlang.org/docs/gradle.html)
 - [Gradle Kotlin DSL 정리, 우아한형제들 기술블로그](https://techblog.woowahan.com/2625/)
