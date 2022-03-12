@@ -3,6 +3,7 @@ tasks {
         enabled = false
     }
     jar {
+        enabled = true
         archiveClassifier.set("")
     }
 }

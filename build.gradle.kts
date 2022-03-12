@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("kapt")
-    id("org.springframework.boot") apply false
+    id("org.springframework.boot")
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
     kotlin("plugin.allopen")
@@ -63,10 +63,35 @@ subprojects {
         kapt("org.springframework.boot:spring-boot-configuration-processor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
+
+    springBoot {
+        buildInfo {
+            properties {
+                time = null
+                if (System.getenv("build_number") != null) {
+                    additional = mapOf(
+                        "build_number" to System.getenv("build_number")
+                    )
+                }
+            }
+        }
+    }
+
+    tasks {
+        bootJar {
+            launchScript()
+        }
+        jar {
+            enabled = false
+        }
+    }
 }
 
 tasks {
     jar {
+        enabled = false
+    }
+    bootJar {
         enabled = false
     }
     test {
