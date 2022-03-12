@@ -57,8 +57,6 @@ subprojects {
 
         implementation("com.querydsl:querydsl-jpa")
         kapt("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties["querydsl.version"]}:jpa")
-        kapt("jakarta.persistence:jakarta.persistence-api")
-        kapt("jakarta.annotation:jakarta.annotation-api")
 
         runtimeOnly("com.h2database:h2")
 
