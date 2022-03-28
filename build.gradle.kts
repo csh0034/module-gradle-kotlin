@@ -6,7 +6,6 @@ plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
     kotlin("plugin.spring")
-    kotlin("plugin.allopen")
     kotlin("plugin.jpa")
 }
 
@@ -23,7 +22,6 @@ subprojects {
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
         plugin("kotlin-spring")
-        plugin("kotlin-allopen")
         plugin("kotlin-jpa")
     }
 
