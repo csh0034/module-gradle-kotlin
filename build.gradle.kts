@@ -77,10 +77,12 @@ subprojects {
     }
 
     // settingsPropertiesPath => ~/.gradle/gradle.properties
-    loadProperties(project.properties["settingsPropertiesPath"] as String).forEach {
-        val key = it.key as String
-        val value = it.value as String
-        ext.set(key, value)
+    project.properties["settingsPropertiesPath"]?.let {
+        loadProperties(it as String).forEach { entry ->
+            val key = entry.key as String
+            val value = entry.value as String
+            ext.set(key, value)
+        }
     }
 
     tasks {
