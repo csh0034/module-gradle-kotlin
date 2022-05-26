@@ -20,3 +20,7 @@ logging:
     "[com.ask]": debug
     "[org.hibernate.SQL]": debug
     "[org.hibernate.type.descriptor.sql.BasicBinder]": trace
+
+custom:
+  version: ${version}
+  db-address: ${dbAddress}

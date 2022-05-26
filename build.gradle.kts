@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.konan.properties.loadProperties
 
 plugins {
     kotlin("jvm")
@@ -75,12 +76,24 @@ subprojects {
         }
     }
 
+    // settingsPropertiesPath => ~/.gradle/gradle.properties
+    loadProperties(project.properties["settingsPropertiesPath"] as String).forEach {
+        val key = it.key as String
+        val value = it.value as String
+        ext.set(key, value)
+    }
+
     tasks {
         bootJar {
             launchScript()
         }
         jar {
             enabled = false
+        }
+        processResources {
+            filesMatching("*.yml") {
+                expand(project.properties)
+            }
         }
     }
 }
