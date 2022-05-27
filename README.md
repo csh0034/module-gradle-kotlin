@@ -99,6 +99,46 @@ val springBootVersion: String by settings
 val dependencyManagementVersion: String by settings
 ```
 
+### 빌드환경별 프로퍼티 주입
+
+#### build.gradle.kts
+
+project property 에서 주입할 properties path 를 꺼내서 extra property 에 세팅
+
+- extra property 에 주입할 경우 project.properties 에서 꺼낼 수 있음
+
+```kotlin
+project.properties["settingsPropertiesPath"]?.let {
+    org.jetbrains.kotlin.konan.properties.loadProperties(it as String).forEach { entry ->
+        val key = entry.key as String
+        val value = entry.value as String
+        ext.set(key, value)
+    }
+}
+
+// yml 파일만 처리되도록 지정
+processResources {
+    filesMatching("*.yml") {
+        expand(project.properties)
+    }
+}
+```
+
+#### gradle.properties 에 값 지정
+
+~/.gradle/gradle.properties 추가
+
+```properties
+settingsPropertiesPath=/Users/../../local.properties
+```
+
+#### gradle build 할때 지정
+
+```shell
+$ clean build -PsettingsPropertiesPath=settings/dev.properties
+$ clean build -PsettingsPropertiesPath=settings/st.properties
+```
+
 ## 참조
 - [kotlin, gradle](https://kotlinlang.org/docs/gradle.html)
 - [Gradle Kotlin DSL 정리, 우아한형제들 기술블로그](https://techblog.woowahan.com/2625/)
