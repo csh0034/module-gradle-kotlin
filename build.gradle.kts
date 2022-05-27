@@ -67,9 +67,9 @@ subprojects {
         buildInfo {
             properties {
                 time = null
-                if (System.getenv("build_number") != null) {
+                System.getenv("build_number")?.let {
                     additional = mapOf(
-                        "build_number" to System.getenv("build_number")
+                        "build_number" to it
                     )
                 }
             }
