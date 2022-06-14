@@ -66,11 +66,8 @@ subprojects {
     springBoot {
         buildInfo {
             properties {
-                time = null
-                System.getenv("build_number")?.let {
-                    additional = mapOf(
-                        "build_number" to it
-                    )
+                System.getenv("BUILD_NUMBER")?.let {
+                    additional = mapOf("build_number" to it)
                 }
             }
         }
