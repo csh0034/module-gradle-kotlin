@@ -1,5 +1,17 @@
 # Gradle Multi Module Kotlin
 
+## [Gradle Build Lifecycle](https://docs.gradle.org/current/userguide/build_lifecycle.html)
+
+### Build phases
+
+- Initialization 
+  - 단일/멀티 프로젝트 빌드 지원. 초기화 단계에서는 어느 프로젝트를 빌드하는지 결정하고 각각에 대해 Project 객체를 생성한다.
+- Configuration
+  - 빌드에 속하는 모든 프로젝트의 빌드 스크립트를 실행한다. 이를 통해 프로젝트 객체를 구성한다.
+- Execution
+  - 구성 단계에서 생성하고 설정된 테스크 중에 실행할 것을 결정한다.   
+    이 때 gradle 명령행에 인자로 지정한 테스크 이름과 현재 디렉토리를 기반으로 테스크를 결정하여 선택된것들을 실행한다.
+
 ## Setting
 
 ### [Kotlin dsl user guide](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
