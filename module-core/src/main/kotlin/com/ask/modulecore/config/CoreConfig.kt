@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationPropertiesScan
 class CoreConfig {
 
-    private val log = logger()
+  private val log = logger()
 
-    @Bean
-    fun appRunner(customProperties: CustomProperties) = ApplicationRunner() {
-        log.info("customProperties: $customProperties")
-    }
+  @Bean
+  fun appRunner(customProperties: CustomProperties) = ApplicationRunner {
+    log.info("customProperties: $customProperties")
+  }
 
 }
